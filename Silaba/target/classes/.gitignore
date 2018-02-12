@@ -1,0 +1,16 @@
+/META-INF/
+/WEB-INF/
+/XHTML/
+/aopContext.xml
+/applicationContext.xml
+/com/
+/css/
+/dataSourceContext.xml
+/hibernate.cfg.xml
+/images/
+/index.jsp
+/log4j.dtd
+/log4j.xml
+/login.xhtml
+/securityContext.xml
+/viewCars.xhtml

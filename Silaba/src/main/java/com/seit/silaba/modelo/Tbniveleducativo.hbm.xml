@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-jul-2017 6:40:17 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.seit.silaba.modelo.Tbniveleducativo" table="tbniveleducativo" schema="public" optimistic-lock="version">
+        <id name="consecutivo" type="java.lang.Integer">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="java.lang.String">
+            <column name="descripcion" length="45" />
+        </property>
+        <set name="tbmetasxniveleducativos" table="tbmetasxniveleducativo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_nvl_edctvo" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbmetasxniveleducativo" />
+        </set>
+    </class>
+</hibernate-mapping>

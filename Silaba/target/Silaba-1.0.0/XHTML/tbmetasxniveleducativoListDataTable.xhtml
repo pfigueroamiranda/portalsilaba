@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableTbmetasxniveleducativo" header="TbmetasxniveleducativoData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{tbmetasxniveleducativoView.data}" var="tbmetasxniveleducativo"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{tbmetasxniveleducativo.cosecutivo}" sortBy="#{tbmetasxniveleducativo.cosecutivo}" >
+										 <f:facet name="header">
+										<h:outputText value="cosecutivo"/>
+										</f:facet>
+										 <h:outputText value="#{tbmetasxniveleducativo.cosecutivo}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{tbmetasxniveleducativo.meta}" sortBy="#{tbmetasxniveleducativo.meta}" >
+										 <f:facet name="header">
+										<h:outputText value="Meta"/>
+										</f:facet>
+										 <h:outputText value="#{tbmetasxniveleducativo.meta}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbmetasxniveleducativo.consecutivo_Tbcompetenciasareas}" sortBy="#{tbmetasxniveleducativo.consecutivo_Tbcompetenciasareas}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbcompetenciasareas"/>
+										</f:facet>
+										 <h:outputText value="#{tbmetasxniveleducativo.consecutivo_Tbcompetenciasareas}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbmetasxniveleducativo.consecutivo_Tbniveleducativo}" sortBy="#{tbmetasxniveleducativo.consecutivo_Tbniveleducativo}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbniveleducativo"/>
+										</f:facet>
+										 <h:outputText value="#{tbmetasxniveleducativo.consecutivo_Tbniveleducativo}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Opciones">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogTbmetasxniveleducativo"
+										actionListener="#{tbmetasxniveleducativoView.action_edit}">
+										<f:attribute name="selectedTbmetasxniveleducativo" value="#{tbmetasxniveleducativo}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Borrar" actionListener="#{tbmetasxniveleducativoView.action_delete_datatable}"
+										onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedTbmetasxniveleducativo" value="#{tbmetasxniveleducativo}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{tbmetasxniveleducativoView.action_new()}" update=":dialogTbmetasxniveleducativo" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogTbmetasxniveleducativo" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{tbmetasxniveleducativoView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelTbmetasxniveleducativo" header="Tbmetasxniveleducativo">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgCosecutivo" value="Cosecutivo"/>
+									 <p:inputText id="txtCosecutivo" binding="#{tbmetasxniveleducativoView.txtCosecutivo}">
+									 <p:ajax update=":dialogTbmetasxniveleducativo" listener="#{tbmetasxniveleducativoView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgMeta" value=" Meta"/>
+									<p:inputText id="txtMeta" disabled="true" binding="#{tbmetasxniveleducativoView.txtMeta}"/>
+																		<h:outputText id="msgConsecutivo_Tbcompetenciasareas" value=" Consecutivo_Tbcompetenciasareas"/>
+									<p:inputText id="txtConsecutivo_Tbcompetenciasareas" disabled="true" binding="#{tbmetasxniveleducativoView.txtConsecutivo_Tbcompetenciasareas}"/>
+																		<h:outputText id="msgConsecutivo_Tbniveleducativo" value=" Consecutivo_Tbniveleducativo"/>
+									<p:inputText id="txtConsecutivo_Tbniveleducativo" disabled="true" binding="#{tbmetasxniveleducativoView.txtConsecutivo_Tbniveleducativo}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{tbmetasxniveleducativoView.btnSave}" value="Grabar" action="#{tbmetasxniveleducativoView.action_save()}" update=":dialogTbmetasxniveleducativo :frm:panelDataTableTbmetasxniveleducativo" />
+									<p:commandButton id="btnClear" value="Limpiar" action="#{tbmetasxniveleducativoView.action_clear()}" update=":dialogTbmetasxniveleducativo" />
+									<p:commandButton id="btnExit" value="Exit" action="#{tbmetasxniveleducativoView.action_closeDialog()}" update=":dialogTbmetasxniveleducativo" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

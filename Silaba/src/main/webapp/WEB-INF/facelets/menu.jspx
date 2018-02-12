@@ -1,0 +1,301 @@
+<jsp:root jsfc="f:view" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<html>
+<body>
+	<f:view>
+		<ui:composition>
+			<!-- Beging Menu -->
+
+			<h:form>
+
+				<p:megaMenu style="width:989px">
+					<p:submenu label="Programaciones" icon="ui-icon-pencil">
+						<p:column>
+<!--
+							<p:submenu label="Tbcatalogoareas">
+								<p:menuitem value="Master Tbcatalogoareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogoareas.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogocompetencias">
+								<p:menuitem value="Master Tbcatalogocompetencias"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogocompetencias.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogoexperienciaaprendizaje">
+								<p:menuitem value="Master Tbcatalogoexperienciaaprendizaje"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogoexperienciaaprendizaje.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogopuntossilaba">
+								<p:menuitem value="Master Tbcatalogopuntossilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogopuntossilaba.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcompetenciasareas">
+								<p:menuitem value="Master Tbcompetenciasareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcompetenciasareas.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcompetenciaspuntossilaba">
+								<p:menuitem value="Master Tbcompetenciaspuntossilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcompetenciaspuntossilaba.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcontenidosilaber">
+								<p:menuitem value="Master Tbcontenidosilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcontenidosilaber.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbelementosdidacticos">
+								<p:menuitem value="Master Tbelementosdidacticos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbelementosdidacticos.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbestimulosdidacticossilaberxcompetencias">
+								<p:menuitem
+									value="Master Tbestimulosdidacticossilaberxcompetencias"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbestimulosdidacticossilaberxcompetencias.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbexperienciapuntos">
+								<p:menuitem value="Master Tbexperienciapuntos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbexperienciapuntos.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbmapacompetenciassilaber">
+								<p:menuitem value="Master Tbmapacompetenciassilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbmapacompetenciassilaber.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbmetasxniveleducativo">
+								<p:menuitem value="Master Tbmetasxniveleducativo"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbmetasxniveleducativo.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbniveleducativo">
+								<p:menuitem value="Master Tbniveleducativo"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbniveleducativo.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbprogramacionexperienciasilaber">
+								<p:menuitem value="Master Tbprogramacionexperienciasilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbprogramacionexperienciasilaber.xhtml" />
+							</p:submenu>
+							-->
+							<p:submenu label="Experiencia Puntos">
+								<p:menuitem value="Experiencia Puntos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbexperienciapuntos.xhtml" />
+							</p:submenu>
+							<p:submenu label="Catalogo Puntos Silaba">
+								<p:menuitem value="Catalogo Puntos Silaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogopuntossilaba.xhtml" />
+							</p:submenu>
+							<p:submenu label="Silaber">
+								<p:menuitem value="Silaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsilaber.xhtml" />
+							</p:submenu>
+							<p:submenu label="Proyectos">
+								<p:menuitem value="Proyectos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbrutaexperienciaaprendizaje.xhtml" />
+							</p:submenu>
+							<!--
+							
+							<p:submenu label="Tbsocio">
+								<p:menuitem value="Master Tbsocio"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsocio.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbsociospuntosilaba">
+								<p:menuitem value="Master Tbsociospuntosilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsociospuntosilaba.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbtemasareas">
+								<p:menuitem value="Master Tbtemasareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbtemasareas.xhtml" />
+							</p:submenu>
+							-->
+						</p:column>
+					</p:submenu>
+
+
+
+					<p:submenu label="Tabla" icon="ui-icon-document">
+						<p:column>
+						<!--
+							<p:submenu label="Tbcatalogoareas">
+								<p:menuitem value="Tbcatalogoareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogoareasListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogocompetencias">
+								<p:menuitem value="Tbcatalogocompetencias"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogocompetenciasListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogoexperienciaaprendizaje">
+								<p:menuitem value="Tbcatalogoexperienciaaprendizaje"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogoexperienciaaprendizajeListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogopuntossilaba">
+								<p:menuitem value="Tbcatalogopuntossilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogopuntossilabaListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcompetenciasareas">
+								<p:menuitem value="Tbcompetenciasareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcompetenciasareasListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcompetenciaspuntossilaba">
+								<p:menuitem value="Tbcompetenciaspuntossilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcompetenciaspuntossilabaListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcontenidosilaber">
+								<p:menuitem value="Tbcontenidosilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcontenidosilaberListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbelementosdidacticos">
+								<p:menuitem value="Tbelementosdidacticos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbelementosdidacticosListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbestimulosdidacticossilaberxcompetencias">
+								<p:menuitem value="Tbestimulosdidacticossilaberxcompetencias"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbestimulosdidacticossilaberxcompetenciasListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbexperienciapuntos">
+								<p:menuitem value="Tbexperienciapuntos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbexperienciapuntosListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbmapacompetenciassilaber">
+								<p:menuitem value="Tbmapacompetenciassilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbmapacompetenciassilaberListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbmetasxniveleducativo">
+								<p:menuitem value="Tbmetasxniveleducativo"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbmetasxniveleducativoListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbniveleducativo">
+								<p:menuitem value="Tbniveleducativo"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbniveleducativoListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbprogramacionexperienciasilaber">
+								<p:menuitem value="Tbprogramacionexperienciasilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbprogramacionexperienciasilaberListDataTable.xhtml" />
+							</p:submenu>
+							
+							<p:submenu label="Listado Proyectos">
+								<p:menuitem value="Listado Proyectos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbrutaexperienciaaprendizajeListDataTable.xhtml" />
+							</p:submenu>
+							-->
+							<p:submenu label="Listado Silaber">
+								<p:menuitem value="Listado Silaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsilaberListDataTable.xhtml" />
+							</p:submenu>
+							<!-- <p:submenu label="Tbsocio">
+								<p:menuitem value="Tbsocio"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsocioListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbsociospuntosilaba">
+								<p:menuitem value="Tbsociospuntosilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsociospuntosilabaListDataTable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbtemasareas">
+								<p:menuitem value="Tbtemasareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbtemasareasListDataTable.xhtml" />
+							</p:submenu>
+							-->
+						</p:column>
+					</p:submenu>
+
+
+
+
+					<p:submenu label="Editar" icon="ui-icon-contact">
+						<p:column>
+							<!--
+							<p:submenu label="Tbcatalogoareas">
+								<p:menuitem value="Tbcatalogoareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogoareasListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogocompetencias">
+								<p:menuitem value="Tbcatalogocompetencias"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogocompetenciasListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogoexperienciaaprendizaje">
+								<p:menuitem value="Tbcatalogoexperienciaaprendizaje"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogoexperienciaaprendizajeListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcatalogopuntossilaba">
+								<p:menuitem value="Tbcatalogopuntossilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcatalogopuntossilabaListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcompetenciasareas">
+								<p:menuitem value="Tbcompetenciasareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcompetenciasareasListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcompetenciaspuntossilaba">
+								<p:menuitem value="Tbcompetenciaspuntossilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcompetenciaspuntossilabaListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbcontenidosilaber">
+								<p:menuitem value="Tbcontenidosilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbcontenidosilaberListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbelementosdidacticos">
+								<p:menuitem value="Tbelementosdidacticos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbelementosdidacticosListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbestimulosdidacticossilaberxcompetencias">
+								<p:menuitem value="Tbestimulosdidacticossilaberxcompetencias"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbestimulosdidacticossilaberxcompetenciasListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbexperienciapuntos">
+								<p:menuitem value="Tbexperienciapuntos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbexperienciapuntosListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbmapacompetenciassilaber">
+								<p:menuitem value="Tbmapacompetenciassilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbmapacompetenciassilaberListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbmetasxniveleducativo">
+								<p:menuitem value="Tbmetasxniveleducativo"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbmetasxniveleducativoListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbniveleducativo">
+								<p:menuitem value="Tbniveleducativo"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbniveleducativoListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbprogramacionexperienciasilaber">
+								<p:menuitem value="Tbprogramacionexperienciasilaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbprogramacionexperienciasilaberListDataTableEditable.xhtml" />
+							</p:submenu>
+							-->
+							<p:submenu label="Lista Proyectos">
+								<p:menuitem value="Lista Proyectos"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbrutaexperienciaaprendizajeListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Lista Silaber">
+								<p:menuitem value="Lista Silaber"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsilaberListDataTableEditable.xhtml" />
+							</p:submenu>
+							<!--
+							<p:submenu label="Tbsocio">
+								<p:menuitem value="Tbsocio"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsocioListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbsociospuntosilaba">
+								<p:menuitem value="Tbsociospuntosilaba"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbsociospuntosilabaListDataTableEditable.xhtml" />
+							</p:submenu>
+							<p:submenu label="Tbtemasareas">
+								<p:menuitem value="Tbtemasareas"
+									url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/tbtemasareasListDataTableEditable.xhtml" />
+							</p:submenu>
+							-->
+						</p:column>
+						
+					</p:submenu>
+
+					<p:menuitem value="Salir"
+						url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/index.jsp"
+						icon="ui-icon-close" />
+
+				</p:megaMenu>
+			</h:form>
+
+			<!-- end menu -->
+		</ui:composition>
+	</f:view>
+</body>
+	</html>
+</jsp:root>

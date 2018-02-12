@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableTbrutaexperienciaaprendizaje" header="Listado detallado de Rutas Programadas">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{tbrutaexperienciaaprendizajeView.data}" var="tbrutaexperienciaaprendizaje"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{tbrutaexperienciaaprendizaje.consecutivo}" sortBy="#{tbrutaexperienciaaprendizaje.consecutivo}" >
+										 <f:facet name="header">
+										<h:outputText value="consecutivo"/>
+										</f:facet>
+										 <h:outputText value="#{tbrutaexperienciaaprendizaje.consecutivo}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{tbrutaexperienciaaprendizaje.codigo}" sortBy="#{tbrutaexperienciaaprendizaje.codigo}" >
+										 <f:facet name="header">
+										<h:outputText value="Codigo"/>
+										</f:facet>
+										 <h:outputText value="#{tbrutaexperienciaaprendizaje.codigo}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbrutaexperienciaaprendizaje.descripcion}" sortBy="#{tbrutaexperienciaaprendizaje.descripcion}" >
+										 <f:facet name="header">
+										<h:outputText value="Descripcion"/>
+										</f:facet>
+										 <h:outputText value="#{tbrutaexperienciaaprendizaje.descripcion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbrutaexperienciaaprendizaje.fechaCreacion}" sortBy="#{tbrutaexperienciaaprendizaje.fechaCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="FechaCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbrutaexperienciaaprendizaje.fechaCreacion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbrutaexperienciaaprendizaje.usuarioCreacion}" sortBy="#{tbrutaexperienciaaprendizaje.usuarioCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="UsuarioCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbrutaexperienciaaprendizaje.usuarioCreacion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbrutaexperienciaaprendizaje.consecutivo_Tbcatalogoexperienciaaprendizaje}" sortBy="#{tbrutaexperienciaaprendizaje.consecutivo_Tbcatalogoexperienciaaprendizaje}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbcatalogoexperienciaaprendizaje"/>
+										</f:facet>
+										 <h:outputText value="#{tbrutaexperienciaaprendizaje.consecutivo_Tbcatalogoexperienciaaprendizaje}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbrutaexperienciaaprendizaje.consecutivo_Tbsilaber}" sortBy="#{tbrutaexperienciaaprendizaje.consecutivo_Tbsilaber}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbsilaber"/>
+										</f:facet>
+										 <h:outputText value="#{tbrutaexperienciaaprendizaje.consecutivo_Tbsilaber}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Opciones">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogTbrutaexperienciaaprendizaje"
+										actionListener="#{tbrutaexperienciaaprendizajeView.action_edit}">
+										<f:attribute name="selectedTbrutaexperienciaaprendizaje" value="#{tbrutaexperienciaaprendizaje}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Borrar" actionListener="#{tbrutaexperienciaaprendizajeView.action_delete_datatable}"
+										onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedTbrutaexperienciaaprendizaje" value="#{tbrutaexperienciaaprendizaje}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{tbrutaexperienciaaprendizajeView.action_new()}" update=":dialogTbrutaexperienciaaprendizaje" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogTbrutaexperienciaaprendizaje" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{tbrutaexperienciaaprendizajeView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelTbrutaexperienciaaprendizaje" header="Tbrutaexperienciaaprendizaje">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgConsecutivo" value="Consecutivo"/>
+									 <p:inputText id="txtConsecutivo" binding="#{tbrutaexperienciaaprendizajeView.txtConsecutivo}">
+									 <p:ajax update=":dialogTbrutaexperienciaaprendizaje" listener="#{tbrutaexperienciaaprendizajeView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgCodigo" value=" Codigo"/>
+									<p:inputText id="txtCodigo" disabled="true" binding="#{tbrutaexperienciaaprendizajeView.txtCodigo}"/>
+																		<h:outputText id="msgDescripcion" value=" Descripcion"/>
+									<p:inputText id="txtDescripcion" disabled="true" binding="#{tbrutaexperienciaaprendizajeView.txtDescripcion}"/>
+																		<h:outputText id="msgFechaCreacion" value=" FechaCreacion"/>
+									<p:inputText id="txtFechaCreacion" disabled="true" binding="#{tbrutaexperienciaaprendizajeView.txtFechaCreacion}"/>
+																		<h:outputText id="msgUsuarioCreacion" value=" UsuarioCreacion"/>
+									<p:inputText id="txtUsuarioCreacion" disabled="true" binding="#{tbrutaexperienciaaprendizajeView.txtUsuarioCreacion}"/>
+																		<h:outputText id="msgConsecutivo_Tbcatalogoexperienciaaprendizaje" value=" Consecutivo_Tbcatalogoexperienciaaprendizaje"/>
+									<p:inputText id="txtConsecutivo_Tbcatalogoexperienciaaprendizaje" disabled="true" binding="#{tbrutaexperienciaaprendizajeView.txtConsecutivo_Tbcatalogoexperienciaaprendizaje}"/>
+																		<h:outputText id="msgConsecutivo_Tbsilaber" value=" Consecutivo_Tbsilaber"/>
+									<p:inputText id="txtConsecutivo_Tbsilaber" disabled="true" binding="#{tbrutaexperienciaaprendizajeView.txtConsecutivo_Tbsilaber}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{tbrutaexperienciaaprendizajeView.btnSave}" value="Grabar" action="#{tbrutaexperienciaaprendizajeView.action_save()}" update=":dialogTbrutaexperienciaaprendizaje :frm:panelDataTableTbrutaexperienciaaprendizaje" />
+									<p:commandButton id="btnClear" value="Limpiar" action="#{tbrutaexperienciaaprendizajeView.action_clear()}" update=":dialogTbrutaexperienciaaprendizaje" />
+									<p:commandButton id="btnExit" value="Exit" action="#{tbrutaexperienciaaprendizajeView.action_closeDialog()}" update=":dialogTbrutaexperienciaaprendizaje" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

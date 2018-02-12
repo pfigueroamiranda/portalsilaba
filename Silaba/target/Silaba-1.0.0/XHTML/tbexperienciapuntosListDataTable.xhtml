@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableTbexperienciapuntos" header="TbexperienciapuntosData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{tbexperienciapuntosView.data}" var="tbexperienciapuntos"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{tbexperienciapuntos.consecutivo}" sortBy="#{tbexperienciapuntos.consecutivo}" >
+										 <f:facet name="header">
+										<h:outputText value="consecutivo"/>
+										</f:facet>
+										 <h:outputText value="#{tbexperienciapuntos.consecutivo}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{tbexperienciapuntos.consecutivo_Tbcatalogoexperienciaaprendizaje}" sortBy="#{tbexperienciapuntos.consecutivo_Tbcatalogoexperienciaaprendizaje}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbcatalogoexperienciaaprendizaje"/>
+										</f:facet>
+										 <h:outputText value="#{tbexperienciapuntos.consecutivo_Tbcatalogoexperienciaaprendizaje}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbexperienciapuntos.consecutivo_Tbcatalogopuntossilaba}" sortBy="#{tbexperienciapuntos.consecutivo_Tbcatalogopuntossilaba}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbcatalogopuntossilaba"/>
+										</f:facet>
+										 <h:outputText value="#{tbexperienciapuntos.consecutivo_Tbcatalogopuntossilaba}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Opciones">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogTbexperienciapuntos"
+										actionListener="#{tbexperienciapuntosView.action_edit}">
+										<f:attribute name="selectedTbexperienciapuntos" value="#{tbexperienciapuntos}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Borrar" actionListener="#{tbexperienciapuntosView.action_delete_datatable}"
+										onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedTbexperienciapuntos" value="#{tbexperienciapuntos}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{tbexperienciapuntosView.action_new()}" update=":dialogTbexperienciapuntos" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogTbexperienciapuntos" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{tbexperienciapuntosView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelTbexperienciapuntos" header="Tbexperienciapuntos">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgConsecutivo" value="Consecutivo"/>
+									 <p:inputText id="txtConsecutivo" binding="#{tbexperienciapuntosView.txtConsecutivo}">
+									 <p:ajax update=":dialogTbexperienciapuntos" listener="#{tbexperienciapuntosView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgConsecutivo_Tbcatalogoexperienciaaprendizaje" value=" Consecutivo_Tbcatalogoexperienciaaprendizaje"/>
+									<p:inputText id="txtConsecutivo_Tbcatalogoexperienciaaprendizaje" disabled="true" binding="#{tbexperienciapuntosView.txtConsecutivo_Tbcatalogoexperienciaaprendizaje}"/>
+																		<h:outputText id="msgConsecutivo_Tbcatalogopuntossilaba" value=" Consecutivo_Tbcatalogopuntossilaba"/>
+									<p:inputText id="txtConsecutivo_Tbcatalogopuntossilaba" disabled="true" binding="#{tbexperienciapuntosView.txtConsecutivo_Tbcatalogopuntossilaba}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{tbexperienciapuntosView.btnSave}" value="Grabar" action="#{tbexperienciapuntosView.action_save()}" update=":dialogTbexperienciapuntos :frm:panelDataTableTbexperienciapuntos" />
+									<p:commandButton id="btnClear" value="Limpiar" action="#{tbexperienciapuntosView.action_clear()}" update=":dialogTbexperienciapuntos" />
+									<p:commandButton id="btnExit" value="Exit" action="#{tbexperienciapuntosView.action_closeDialog()}" update=":dialogTbexperienciapuntos" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

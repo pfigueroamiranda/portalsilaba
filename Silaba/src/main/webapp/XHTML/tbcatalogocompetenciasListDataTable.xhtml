@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableTbcatalogocompetencias" header="TbcatalogocompetenciasData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{tbcatalogocompetenciasView.data}" var="tbcatalogocompetencias"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{tbcatalogocompetencias.consecutivo}" sortBy="#{tbcatalogocompetencias.consecutivo}" >
+										 <f:facet name="header">
+										<h:outputText value="consecutivo"/>
+										</f:facet>
+										 <h:outputText value="#{tbcatalogocompetencias.consecutivo}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{tbcatalogocompetencias.codigo}" sortBy="#{tbcatalogocompetencias.codigo}" >
+										 <f:facet name="header">
+										<h:outputText value="Codigo"/>
+										</f:facet>
+										 <h:outputText value="#{tbcatalogocompetencias.codigo}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbcatalogocompetencias.descripcion}" sortBy="#{tbcatalogocompetencias.descripcion}" >
+										 <f:facet name="header">
+										<h:outputText value="Descripcion"/>
+										</f:facet>
+										 <h:outputText value="#{tbcatalogocompetencias.descripcion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbcatalogocompetencias.fechaCreacion}" sortBy="#{tbcatalogocompetencias.fechaCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="FechaCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbcatalogocompetencias.fechaCreacion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbcatalogocompetencias.usuarioCreacion}" sortBy="#{tbcatalogocompetencias.usuarioCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="UsuarioCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbcatalogocompetencias.usuarioCreacion}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Opciones">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogTbcatalogocompetencias"
+										actionListener="#{tbcatalogocompetenciasView.action_edit}">
+										<f:attribute name="selectedTbcatalogocompetencias" value="#{tbcatalogocompetencias}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Borrar" actionListener="#{tbcatalogocompetenciasView.action_delete_datatable}"
+										onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedTbcatalogocompetencias" value="#{tbcatalogocompetencias}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{tbcatalogocompetenciasView.action_new()}" update=":dialogTbcatalogocompetencias" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogTbcatalogocompetencias" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{tbcatalogocompetenciasView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelTbcatalogocompetencias" header="Tbcatalogocompetencias">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgConsecutivo" value="Consecutivo"/>
+									 <p:inputText id="txtConsecutivo" binding="#{tbcatalogocompetenciasView.txtConsecutivo}">
+									 <p:ajax update=":dialogTbcatalogocompetencias" listener="#{tbcatalogocompetenciasView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgCodigo" value=" Codigo"/>
+									<p:inputText id="txtCodigo" disabled="true" binding="#{tbcatalogocompetenciasView.txtCodigo}"/>
+																		<h:outputText id="msgDescripcion" value=" Descripcion"/>
+									<p:inputText id="txtDescripcion" disabled="true" binding="#{tbcatalogocompetenciasView.txtDescripcion}"/>
+																		<h:outputText id="msgFechaCreacion" value=" FechaCreacion"/>
+									<p:inputText id="txtFechaCreacion" disabled="true" binding="#{tbcatalogocompetenciasView.txtFechaCreacion}"/>
+																		<h:outputText id="msgUsuarioCreacion" value=" UsuarioCreacion"/>
+									<p:inputText id="txtUsuarioCreacion" disabled="true" binding="#{tbcatalogocompetenciasView.txtUsuarioCreacion}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{tbcatalogocompetenciasView.btnSave}" value="Grabar" action="#{tbcatalogocompetenciasView.action_save()}" update=":dialogTbcatalogocompetencias :frm:panelDataTableTbcatalogocompetencias" />
+									<p:commandButton id="btnClear" value="Limpiar" action="#{tbcatalogocompetenciasView.action_clear()}" update=":dialogTbcatalogocompetencias" />
+									<p:commandButton id="btnExit" value="Exit" action="#{tbcatalogocompetenciasView.action_closeDialog()}" update=":dialogTbcatalogocompetencias" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

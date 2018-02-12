@@ -1,0 +1,163 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableTbsilaber" header="TbsilaberData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{tbsilaberView.data}" var="tbsilaber"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{tbsilaber.consecutivo}" sortBy="#{tbsilaber.consecutivo}" >
+										 <f:facet name="header">
+										<h:outputText value="consecutivo"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.consecutivo}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{tbsilaber.apellido}" sortBy="#{tbsilaber.apellido}" >
+										 <f:facet name="header">
+										<h:outputText value="Apellido"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.apellido}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbsilaber.fechaCreacion}" sortBy="#{tbsilaber.fechaCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="FechaCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.fechaCreacion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbsilaber.fechaNacimiento}" sortBy="#{tbsilaber.fechaNacimiento}" >
+										 <f:facet name="header">
+										<h:outputText value="FechaNacimiento"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.fechaNacimiento}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbsilaber.nombre}" sortBy="#{tbsilaber.nombre}" >
+										 <f:facet name="header">
+										<h:outputText value="Nombre"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.nombre}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbsilaber.telefonoCelular}" sortBy="#{tbsilaber.telefonoCelular}" >
+										 <f:facet name="header">
+										<h:outputText value="TelefonoCelular"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.telefonoCelular}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbsilaber.telefonoFijo}" sortBy="#{tbsilaber.telefonoFijo}" >
+										 <f:facet name="header">
+										<h:outputText value="TelefonoFijo"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.telefonoFijo}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbsilaber.usuarioCreacion}" sortBy="#{tbsilaber.usuarioCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="UsuarioCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbsilaber.usuarioCreacion}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Opciones">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogTbsilaber"
+										actionListener="#{tbsilaberView.action_edit}">
+										<f:attribute name="selectedTbsilaber" value="#{tbsilaber}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Borrar" actionListener="#{tbsilaberView.action_delete_datatable}"
+										onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedTbsilaber" value="#{tbsilaber}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{tbsilaberView.action_new()}" update=":dialogTbsilaber" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogTbsilaber" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{tbsilaberView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelTbsilaber" header="Tbsilaber">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgConsecutivo" value="Consecutivo"/>
+									 <p:inputText id="txtConsecutivo" binding="#{tbsilaberView.txtConsecutivo}">
+									 <p:ajax update=":dialogTbsilaber" listener="#{tbsilaberView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgApellido" value=" Apellido"/>
+									<p:inputText id="txtApellido" disabled="true" binding="#{tbsilaberView.txtApellido}"/>
+																		<h:outputText id="msgNombre" value=" Nombre"/>
+									<p:inputText id="txtNombre" disabled="true" binding="#{tbsilaberView.txtNombre}"/>
+																		<h:outputText id="msgTelefonoCelular" value=" TelefonoCelular"/>
+									<p:inputText id="txtTelefonoCelular" disabled="true" binding="#{tbsilaberView.txtTelefonoCelular}"/>
+																		<h:outputText id="msgTelefonoFijo" value=" TelefonoFijo"/>
+									<p:inputText id="txtTelefonoFijo" disabled="true" binding="#{tbsilaberView.txtTelefonoFijo}"/>
+																		<h:outputText id="msgUsuarioCreacion" value=" UsuarioCreacion"/>
+									<p:inputText id="txtUsuarioCreacion" disabled="true" binding="#{tbsilaberView.txtUsuarioCreacion}"/>
+																		
+																													<h:outputText id="msgFechaCreacion" value=" FechaCreacion"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{tbsilaberView.txtFechaCreacion}" >
+										<p:ajax event="dateSelect" listener="#{tbsilaberView.listener_txtFechaCreacion}" />
+										</p:calendar>
+																				<h:outputText id="msgFechaNacimiento" value=" FechaNacimiento"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{tbsilaberView.txtFechaNacimiento}" >
+										<p:ajax event="dateSelect" listener="#{tbsilaberView.listener_txtFechaNacimiento}" />
+										</p:calendar>
+																										    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{tbsilaberView.btnSave}" value="Grabar" action="#{tbsilaberView.action_save()}" update=":dialogTbsilaber :frm:panelDataTableTbsilaber" />
+									<p:commandButton id="btnClear" value="Limpiar" action="#{tbsilaberView.action_clear()}" update=":dialogTbsilaber" />
+									<p:commandButton id="btnExit" value="Exit" action="#{tbsilaberView.action_closeDialog()}" update=":dialogTbsilaber" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

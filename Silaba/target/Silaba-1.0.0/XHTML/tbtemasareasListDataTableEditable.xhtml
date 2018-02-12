@@ -1,0 +1,157 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+	    <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+		 
+		 <h:form id="form">
+			
+			 
+			<p:panel id="msgProjectClientesTitle" header="TbtemasareasData">
+					<p:messages id="msg" />
+				<p:dataTable id ="tabla" value="#{tbtemasareasView.data}" var="tbtemasareas"
+					paginator="true" rows="5"  editable="true" >
+					 
+					 <p:ajax event ="rowEdit" update=":form:msg,:form:tabla" listener="#{tbtemasareasView.rowEventListener}" />
+					
+															<p:column filterBy="#{tbtemasareas.consecutivo}" sortBy="#{tbtemasareas.consecutivo}" headerText="consecutivo">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{tbtemasareas.consecutivo}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{tbtemasareas.consecutivo}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+                    										
+											
+						<p:column filterBy="#{tbtemasareas.codigo}" sortBy="#{tbtemasareas.codigo}" 
+							headerText="codigo">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{tbtemasareas.codigo}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{tbtemasareas.codigo}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{tbtemasareas.descripcion}" sortBy="#{tbtemasareas.descripcion}" 
+							headerText="descripcion">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{tbtemasareas.descripcion}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{tbtemasareas.descripcion}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{tbtemasareas.fechaCreacion}" sortBy="#{tbtemasareas.fechaCreacion}" 
+							headerText="fechaCreacion">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{tbtemasareas.fechaCreacion}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{tbtemasareas.fechaCreacion}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{tbtemasareas.usuarioCreacion}" sortBy="#{tbtemasareas.usuarioCreacion}" 
+							headerText="usuarioCreacion">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{tbtemasareas.usuarioCreacion}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{tbtemasareas.usuarioCreacion}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{tbtemasareas.consecutivo_Tbcatalogoareas}" sortBy="#{tbtemasareas.consecutivo_Tbcatalogoareas}" 
+							headerText="consecutivo_Tbcatalogoareas">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{tbtemasareas.consecutivo_Tbcatalogoareas}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{tbtemasareas.consecutivo_Tbcatalogoareas}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+										
+											
+					<p:column headerText="Opciones" >
+						<p:rowEditor id="row"/>
+						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
+						<p:tooltip for="btnDelete" value="Eliminar" showEffect="fade" hideEffect="fade" />
+						<p:commandButton id="btnDelete" actionListener="#{tbtemasareasView.actionDeleteDataTableEditable}" title="Borrar" onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}" icon="ui-icon-trash" update=":form:msg,:form:tabla" >
+							<f:attribute name="selectedTbtemasareas" value="#{tbtemasareas}" />  
+						</p:commandButton>
+						
+					</p:column>	
+				
+				</p:dataTable>	
+					
+				
+			</p:panel>
+				
+	   </h:form>
+		 </f:view>
+			</ui:define>		
+		</ui:composition>	
+	
+	</h:body>	
+	
+</html>	

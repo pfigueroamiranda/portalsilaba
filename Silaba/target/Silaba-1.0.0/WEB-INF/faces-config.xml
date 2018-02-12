@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogoareas.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogoareasListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogoareasListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogoareas</from-outcome>
+			<to-view-id>/XHTML/tbcatalogoareas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogoareasListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogoareasListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogoareasListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogoareasListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogocompetencias.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogocompetenciasListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogocompetenciasListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogocompetencias</from-outcome>
+			<to-view-id>/XHTML/tbcatalogocompetencias.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogocompetenciasListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogocompetenciasListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogocompetenciasListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogocompetenciasListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogoexperienciaaprendizaje.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogoexperienciaaprendizajeListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogoexperienciaaprendizajeListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogoexperienciaaprendizaje</from-outcome>
+			<to-view-id>/XHTML/tbcatalogoexperienciaaprendizaje.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogoexperienciaaprendizajeListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogoexperienciaaprendizajeListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogoexperienciaaprendizajeListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogoexperienciaaprendizajeListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogopuntossilaba.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogopuntossilabaListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcatalogopuntossilabaListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogopuntossilaba</from-outcome>
+			<to-view-id>/XHTML/tbcatalogopuntossilaba.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogopuntossilabaListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogopuntossilabaListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcatalogopuntossilabaListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbcatalogopuntossilabaListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcompetenciasareas.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcompetenciasareasListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcompetenciasareasListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcompetenciasareas</from-outcome>
+			<to-view-id>/XHTML/tbcompetenciasareas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcompetenciasareasListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbcompetenciasareasListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcompetenciasareasListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbcompetenciasareasListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcompetenciaspuntossilaba.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcompetenciaspuntossilabaListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcompetenciaspuntossilabaListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcompetenciaspuntossilaba</from-outcome>
+			<to-view-id>/XHTML/tbcompetenciaspuntossilaba.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcompetenciaspuntossilabaListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbcompetenciaspuntossilabaListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcompetenciaspuntossilabaListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbcompetenciaspuntossilabaListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcontenidosilaber.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcontenidosilaberListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbcontenidosilaberListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcontenidosilaber</from-outcome>
+			<to-view-id>/XHTML/tbcontenidosilaber.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcontenidosilaberListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbcontenidosilaberListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbcontenidosilaberListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbcontenidosilaberListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbelementosdidacticos.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbelementosdidacticosListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbelementosdidacticosListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbelementosdidacticos</from-outcome>
+			<to-view-id>/XHTML/tbelementosdidacticos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbelementosdidacticosListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbelementosdidacticosListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbelementosdidacticosListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbelementosdidacticosListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbestimulosdidacticossilaberxcompetencias.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbestimulosdidacticossilaberxcompetenciasListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbestimulosdidacticossilaberxcompetenciasListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbestimulosdidacticossilaberxcompetencias</from-outcome>
+			<to-view-id>/XHTML/tbestimulosdidacticossilaberxcompetencias.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbestimulosdidacticossilaberxcompetenciasListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbestimulosdidacticossilaberxcompetenciasListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbestimulosdidacticossilaberxcompetenciasListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbestimulosdidacticossilaberxcompetenciasListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbexperienciapuntos.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbexperienciapuntosListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbexperienciapuntosListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbexperienciapuntos</from-outcome>
+			<to-view-id>/XHTML/tbexperienciapuntos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbexperienciapuntosListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbexperienciapuntosListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbexperienciapuntosListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbexperienciapuntosListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbmapacompetenciassilaber.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbmapacompetenciassilaberListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbmapacompetenciassilaberListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbmapacompetenciassilaber</from-outcome>
+			<to-view-id>/XHTML/tbmapacompetenciassilaber.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbmapacompetenciassilaberListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbmapacompetenciassilaberListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbmapacompetenciassilaberListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbmapacompetenciassilaberListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbmetasxniveleducativo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbmetasxniveleducativoListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbmetasxniveleducativoListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbmetasxniveleducativo</from-outcome>
+			<to-view-id>/XHTML/tbmetasxniveleducativo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbmetasxniveleducativoListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbmetasxniveleducativoListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbmetasxniveleducativoListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbmetasxniveleducativoListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbniveleducativo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbniveleducativoListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbniveleducativoListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbniveleducativo</from-outcome>
+			<to-view-id>/XHTML/tbniveleducativo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbniveleducativoListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbniveleducativoListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbniveleducativoListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbniveleducativoListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbprogramacionexperienciasilaber.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbprogramacionexperienciasilaberListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbprogramacionexperienciasilaberListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbprogramacionexperienciasilaber</from-outcome>
+			<to-view-id>/XHTML/tbprogramacionexperienciasilaber.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbprogramacionexperienciasilaberListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbprogramacionexperienciasilaberListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbprogramacionexperienciasilaberListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbprogramacionexperienciasilaberListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbrutaexperienciaaprendizaje.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbrutaexperienciaaprendizajeListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbrutaexperienciaaprendizajeListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbrutaexperienciaaprendizaje</from-outcome>
+			<to-view-id>/XHTML/tbrutaexperienciaaprendizaje.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbrutaexperienciaaprendizajeListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbrutaexperienciaaprendizajeListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbrutaexperienciaaprendizajeListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbrutaexperienciaaprendizajeListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsilaber.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsilaberListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsilaberListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsilaber</from-outcome>
+			<to-view-id>/XHTML/tbsilaber.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsilaberListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbsilaberListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsilaberListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbsilaberListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsocio.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsocioListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsocioListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsocio</from-outcome>
+			<to-view-id>/XHTML/tbsocio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsocioListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbsocioListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsocioListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbsocioListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsociospuntosilaba.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsociospuntosilabaListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbsociospuntosilabaListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsociospuntosilaba</from-outcome>
+			<to-view-id>/XHTML/tbsociospuntosilaba.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsociospuntosilabaListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbsociospuntosilabaListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbsociospuntosilabaListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbsociospuntosilabaListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbtemasareas.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbtemasareasListDataTable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/tbtemasareasListDataTableEditable.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goInitialMenu</from-outcome>
+			<to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbtemasareas</from-outcome>
+			<to-view-id>/XHTML/tbtemasareas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbtemasareasListDataTable</from-outcome>
+			<to-view-id>/XHTML/tbtemasareasListDataTable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goTbtemasareasListDataTableEditable</from-outcome>
+			<to-view-id>/XHTML/tbtemasareasListDataTableEditable.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>goDetalleProgramacionProyectos</from-outcome>
+			<to-view-id>/XHTML/tbrutaexperienciaaprendizajeListDataTableEditable.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

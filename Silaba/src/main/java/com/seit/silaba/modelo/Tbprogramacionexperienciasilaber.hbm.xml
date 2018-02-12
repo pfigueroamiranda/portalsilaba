@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-jul-2017 6:40:17 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.seit.silaba.modelo.Tbprogramacionexperienciasilaber" table="tbprogramacionexperienciasilaber" schema="public" optimistic-lock="version">
+        <id name="consecutivo" type="java.lang.Integer">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbcontenidosilaber" class="com.seit.silaba.modelo.Tbcontenidosilaber" fetch="select">
+            <column name="consecutivo_cntndo_slbr" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbsilaber" class="com.seit.silaba.modelo.Tbsilaber" fetch="select">
+            <column name="consecutivo_slbr" not-null="true" />
+        </many-to-one>
+        <property name="fechaProgramacion" type="java.util.Date">
+            <column name="fecha_programacion" length="13" />
+        </property>
+        <set name="tbmapacompetenciassilabers" table="tbmapacompetenciassilaber" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_prgrmcn_exprnca_slbr" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbmapacompetenciassilaber" />
+        </set>
+    </class>
+</hibernate-mapping>

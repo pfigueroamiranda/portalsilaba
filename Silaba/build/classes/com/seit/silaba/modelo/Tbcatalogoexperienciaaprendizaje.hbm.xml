@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-jul-2017 6:40:17 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.seit.silaba.modelo.Tbcatalogoexperienciaaprendizaje" table="tbcatalogoexperienciaaprendizaje" schema="public" optimistic-lock="version">
+        <id name="consecutivo" type="java.lang.Integer">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbcatalogoexperienciaaprendizaje" class="com.seit.silaba.modelo.Tbcatalogoexperienciaaprendizaje" fetch="select">
+            <column name="consecutivo_ctlgo_exprnca_aprndzje" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="java.lang.String">
+            <column name="codigo" length="45" />
+        </property>
+        <property name="descripcion" type="java.lang.String">
+            <column name="descripcion" length="45" />
+        </property>
+        <property name="fechaCreacion" type="java.lang.String">
+            <column name="fecha_creacion" length="45" />
+        </property>
+        <property name="usuarioCreacion" type="java.lang.String">
+            <column name="usuario_creacion" length="45" />
+        </property>
+        <set name="tbexperienciapuntoses" table="tbexperienciapuntos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_ctlgo_exprnca_aprndzje" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbexperienciapuntos" />
+        </set>
+        <set name="tbcatalogoexperienciaaprendizajes" table="tbcatalogoexperienciaaprendizaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_ctlgo_exprnca_aprndzje" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbcatalogoexperienciaaprendizaje" />
+        </set>
+        <set name="tbrutaexperienciaaprendizajes" table="tbrutaexperienciaaprendizaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_ctlgo_exprnca_aprndzje" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbrutaexperienciaaprendizaje" />
+        </set>
+    </class>
+</hibernate-mapping>

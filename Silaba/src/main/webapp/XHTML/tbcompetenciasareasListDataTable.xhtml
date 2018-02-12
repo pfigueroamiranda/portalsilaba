@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableTbcompetenciasareas" header="TbcompetenciasareasData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{tbcompetenciasareasView.data}" var="tbcompetenciasareas"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{tbcompetenciasareas.consecutivo}" sortBy="#{tbcompetenciasareas.consecutivo}" >
+										 <f:facet name="header">
+										<h:outputText value="consecutivo"/>
+										</f:facet>
+										 <h:outputText value="#{tbcompetenciasareas.consecutivo}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{tbcompetenciasareas.consecutivo_Tbcatalogocompetencias}" sortBy="#{tbcompetenciasareas.consecutivo_Tbcatalogocompetencias}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbcatalogocompetencias"/>
+										</f:facet>
+										 <h:outputText value="#{tbcompetenciasareas.consecutivo_Tbcatalogocompetencias}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbcompetenciasareas.consecutivo_Tbtemasareas}" sortBy="#{tbcompetenciasareas.consecutivo_Tbtemasareas}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbtemasareas"/>
+										</f:facet>
+										 <h:outputText value="#{tbcompetenciasareas.consecutivo_Tbtemasareas}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Opciones">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogTbcompetenciasareas"
+										actionListener="#{tbcompetenciasareasView.action_edit}">
+										<f:attribute name="selectedTbcompetenciasareas" value="#{tbcompetenciasareas}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Borrar" actionListener="#{tbcompetenciasareasView.action_delete_datatable}"
+										onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedTbcompetenciasareas" value="#{tbcompetenciasareas}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{tbcompetenciasareasView.action_new()}" update=":dialogTbcompetenciasareas" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogTbcompetenciasareas" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{tbcompetenciasareasView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelTbcompetenciasareas" header="Tbcompetenciasareas">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgConsecutivo" value="Consecutivo"/>
+									 <p:inputText id="txtConsecutivo" binding="#{tbcompetenciasareasView.txtConsecutivo}">
+									 <p:ajax update=":dialogTbcompetenciasareas" listener="#{tbcompetenciasareasView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgConsecutivo_Tbcatalogocompetencias" value=" Consecutivo_Tbcatalogocompetencias"/>
+									<p:inputText id="txtConsecutivo_Tbcatalogocompetencias" disabled="true" binding="#{tbcompetenciasareasView.txtConsecutivo_Tbcatalogocompetencias}"/>
+																		<h:outputText id="msgConsecutivo_Tbtemasareas" value=" Consecutivo_Tbtemasareas"/>
+									<p:inputText id="txtConsecutivo_Tbtemasareas" disabled="true" binding="#{tbcompetenciasareasView.txtConsecutivo_Tbtemasareas}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{tbcompetenciasareasView.btnSave}" value="Grabar" action="#{tbcompetenciasareasView.action_save()}" update=":dialogTbcompetenciasareas :frm:panelDataTableTbcompetenciasareas" />
+									<p:commandButton id="btnClear" value="Limpiar" action="#{tbcompetenciasareasView.action_clear()}" update=":dialogTbcompetenciasareas" />
+									<p:commandButton id="btnExit" value="Exit" action="#{tbcompetenciasareasView.action_closeDialog()}" update=":dialogTbcompetenciasareas" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

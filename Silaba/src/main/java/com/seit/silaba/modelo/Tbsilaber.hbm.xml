@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-jul-2017 6:40:17 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.seit.silaba.modelo.Tbsilaber" table="tbsilaber" schema="public" optimistic-lock="version">
+        <id name="consecutivo" type="java.lang.Integer">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="java.lang.String">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="apellido" type="java.lang.String">
+            <column name="apellido" length="45" />
+        </property>
+        <property name="usuario" type="java.lang.String">
+            <column name="usuario" length="25" />
+        </property>
+        <property name="contrasena" type="java.lang.String">
+            <column name="contrasena" length="50" />
+        </property>
+        <property name="fechaNacimiento" type="java.util.Date">
+            <column name="fecha_nacimiento" length="13" />
+        </property>
+        <property name="telefonoFijo" type="java.lang.String">
+            <column name="telefono_fijo" length="15" />
+        </property>
+        <property name="telefonoCelular" type="java.lang.String">
+            <column name="telefono_celular" length="15" />
+        </property>
+        <property name="fechaCreacion" type="java.util.Date">
+            <column name="fecha_creacion" length="13" />
+        </property>
+        <property name="usuarioCreacion" type="java.lang.String">
+            <column name="usuario_creacion" length="45" />
+        </property>
+        <set name="tbrutaexperienciaaprendizajes" table="tbrutaexperienciaaprendizaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_slbr" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbrutaexperienciaaprendizaje" />
+        </set>
+        <set name="tbprogramacionexperienciasilabers" table="tbprogramacionexperienciasilaber" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_slbr" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbprogramacionexperienciasilaber" />
+        </set>
+    </class>
+</hibernate-mapping>

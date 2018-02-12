@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">postgres</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/bdSilaba</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <mapping resource="com/seit/silaba/modelo/Tbexperienciapuntos.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbsocio.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbsilaber.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbcatalogoexperienciaaprendizaje.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbniveleducativo.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbestimulosdidacticossilaberxcompetencias.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbcatalogoareas.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbprogramacionexperienciasilaber.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbrutaexperienciaaprendizaje.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbcatalogocompetencias.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbelementosdidacticos.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbmapacompetenciassilaber.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbtemasareas.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbcatalogopuntossilaba.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbcompetenciaspuntossilaba.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbmetasxniveleducativo.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbsociospuntosilaba.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbcontenidosilaber.hbm.xml" />
+        <mapping resource="com/seit/silaba/modelo/Tbcompetenciasareas.hbm.xml" />
+		<mapping resource="com/seit/silaba/modelo/QSilaba.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

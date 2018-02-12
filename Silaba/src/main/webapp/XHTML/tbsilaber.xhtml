@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/facelets/template.xhtml">
+		<ui:define name="body">
+			<f:view>
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+				<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
+					draggable="false" closable="false">
+					<p:graphicImage
+						value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
+				</p:dialog>
+
+				<!-- Expired session -->
+				<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();"
+					timeout="#{session.maxInactiveInterval * 1000}" />
+				<p:dialog modal="true" widgetVar="sessionTimeOutDialog"
+					header="Finalizo la sesion" draggable="false" closable="false">
+					<h:outputText value="The session is finished" />
+					<input id="confirmBackToLogin" type="button" value="Sign in"
+						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
+				</p:dialog>
+
+
+				<h:form id="formDialog">
+					<p:messages id="msg" />
+					<p:growl id="men" />
+					<p:panel id="panelTbsilaber" header="Tbsilaber">
+						<h:panelGrid columns="2" id="panelGrid">
+							<h:outputText id="msgConsecutivo" value="Consecutivo" />
+							<p:inputText id="txtConsecutivo"
+								binding="#{tbsilaberView.txtConsecutivo}">
+								<p:ajax update="panelTbsilaber,msg,panelBotones"
+									listener="#{tbsilaberView.listener_txtId}" />
+							</p:inputText>
+
+
+							<h:outputText id="msgNombre" value=" Nombres" />
+							<p:inputText id="txtNombre" disabled="false"
+								binding="#{tbsilaberView.txtNombre}" />
+							<h:outputText id="msgApellido" value=" Apellidos" />
+							<p:inputText id="txtApellido" disabled="false"
+								binding="#{tbsilaberView.txtApellido}" />
+							<h:outputText id="msgTelefonoFijo" value=" Telefono Fijo" />
+							<p:inputText id="txtTelefonoFijo" disabled="false"
+								binding="#{tbsilaberView.txtTelefonoFijo}" />
+							<h:outputText id="msgTelefonoCelular" value=" Telefono Celular" />
+							<p:inputText id="txtTelefonoCelular" disabled="false"
+								binding="#{tbsilaberView.txtTelefonoCelular}" />
+							<h:outputText id="msgUsuario" value=" Usuario" />
+							<p:inputText id="txtUsusario" disabled="false"
+								binding="#{tbsilaberView.txtUsuario}" />
+							<h:outputText id="msgContrasena" value=" Contrasena" />
+							<p:inputText id="txtContrasena" disabled="false"
+								binding="#{tbsilaberView.txtContrasena}" />
+							<h:outputText id="msgContrasena2" value=" Confirmar Contrasena" />
+							<p:inputText id="txtContrasena2" disabled="false"
+								binding="#{tbsilaberView.txtContrasena2}" />
+							<h:outputText id="msgFechaNacimiento"
+								value=" Fecha de Nacimiento" />
+							<p:calendar showOn="button" navigator="true" locale="en"
+								binding="#{tbsilaberView.txtFechaNacimiento}">
+								<p:ajax event="dateSelect"
+									listener="#{tbsilaberView.listener_txtFechaNacimiento}" />
+							</p:calendar>
+							<h:outputText id="msgUsuarioCreacion" value=" UsuarioCreacion" />
+							<p:inputText id="txtUsuarioCreacion" disabled="false"
+								binding="#{tbsilaberView.txtUsuarioCreacion}" />
+
+							<h:outputText id="msgFechaCreacion" value=" FechaCreacion" />
+							<p:calendar showOn="button" navigator="true" locale="en"
+								binding="#{tbsilaberView.txtFechaCreacion}">
+								<p:ajax event="dateSelect"
+									listener="#{tbsilaberView.listener_txtFechaCreacion}" />
+							</p:calendar>
+
+						</h:panelGrid>
+					</p:panel>
+					<p:panel id="panelBotones">
+						<div align="center">
+							<p:commandButton id="btnSave" binding="#{tbsilaberView.btnSave}"
+								disabled="true" value="Grabar"
+								action="#{tbsilaberView.action_save()}"
+								update="panelTbsilaber,msg,panelBotones" />
+							<p:commandButton id="btnDelete"
+								binding="#{tbsilaberView.btnDelete}" disabled="true"
+								value="Borrar" action="#{tbsilaberView.action_delete_master()}"
+								onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+								update="panelTbsilaber,msg,panelBotones" />
+							<p:commandButton id="btnClear" value="Limpiar"
+								action="#{tbsilaberView.action_clear()}"
+								update="panelTbsilaber,msg,panelBotones" />
+						</div>
+					</p:panel>
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

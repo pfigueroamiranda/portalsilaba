@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>		
+	
+	<h:body>
+		<ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		<ui:define name="body">	
+		<f:view>
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+			<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   				<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+			</p:dialog>
+			
+			<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+			
+			
+			<h:form id="formDialog">
+				<p:messages id="msg" />
+				<p:growl id="men"/>
+					<p:panel id="panelTbprogramacionexperienciasilaber" header="Tbprogramacionexperienciasilaber">							
+						<h:panelGrid columns="2" id="panelGrid" >
+												 	<h:outputText id="msgConsecutivo" value="Consecutivo"/>
+						 	<p:inputText id="txtConsecutivo" binding="#{tbprogramacionexperienciasilaberView.txtConsecutivo}">
+						 		<p:ajax update="panelTbprogramacionexperienciasilaber,msg,panelBotones" listener="#{tbprogramacionexperienciasilaberView.listener_txtId}"/>
+						 	</p:inputText>	
+																		
+													<h:outputText id="msgConsecutivo_Tbcontenidosilaber" value=" Consecutivo_Tbcontenidosilaber"/>
+							<p:inputText id="txtConsecutivo_Tbcontenidosilaber" disabled="true" binding="#{tbprogramacionexperienciasilaberView.txtConsecutivo_Tbcontenidosilaber}"/>
+													<h:outputText id="msgConsecutivo_Tbsilaber" value=" Consecutivo_Tbsilaber"/>
+							<p:inputText id="txtConsecutivo_Tbsilaber" disabled="true" binding="#{tbprogramacionexperienciasilaberView.txtConsecutivo_Tbsilaber}"/>
+												
+																				<h:outputText id="msgFechaProgramacion" value=" FechaProgramacion"/>
+														<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{tbprogramacionexperienciasilaberView.txtFechaProgramacion}" >
+								<p:ajax event="dateSelect" listener="#{tbprogramacionexperienciasilaberView.listener_txtFechaProgramacion}"  />
+							</p:calendar>
+																	   </h:panelGrid>
+				</p:panel>
+	   			<p:panel id="panelBotones">
+					<div align="center">					
+						<p:commandButton id="btnSave" binding="#{tbprogramacionexperienciasilaberView.btnSave}" disabled="true" value="Grabar" action="#{tbprogramacionexperienciasilaberView.action_save()}" update="panelTbprogramacionexperienciasilaber,msg,panelBotones" />
+						<p:commandButton id="btnDelete" binding="#{tbprogramacionexperienciasilaberView.btnDelete}" disabled="true" value="Eliminar" action="#{tbprogramacionexperienciasilaberView.action_delete_master()}" onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}" update="panelTbprogramacionexperienciasilaber,msg,panelBotones" />
+						<p:commandButton id="btnClear" value="Limpiar" action="#{tbprogramacionexperienciasilaberView.action_clear()}" update="panelTbprogramacionexperienciasilaber,msg,panelBotones" />
+					</div>
+				</p:panel>			
+			</h:form>
+		</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

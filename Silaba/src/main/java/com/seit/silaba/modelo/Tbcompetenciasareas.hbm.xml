@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-jul-2017 6:40:17 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.seit.silaba.modelo.Tbcompetenciasareas" table="tbcompetenciasareas" schema="public" optimistic-lock="version">
+        <id name="consecutivo" type="java.lang.Integer">
+            <column name="consecutivo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbcatalogocompetencias" class="com.seit.silaba.modelo.Tbcatalogocompetencias" fetch="select">
+            <column name="consecutivo_ctlgo_cmptncs" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbtemasareas" class="com.seit.silaba.modelo.Tbtemasareas" fetch="select">
+            <column name="consecutivo_tms_ars" not-null="true" />
+        </many-to-one>
+        <set name="tbmetasxniveleducativos" table="tbmetasxniveleducativo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="consecutivo_cmptncs_ars" not-null="true" />
+            </key>
+            <one-to-many class="com.seit.silaba.modelo.Tbmetasxniveleducativo" />
+        </set>
+    </class>
+</hibernate-mapping>

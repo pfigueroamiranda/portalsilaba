@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Procesando.."  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Finalizo la sesion"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableTbtemasareas" header="TbtemasareasData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{tbtemasareasView.data}" var="tbtemasareas"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{tbtemasareas.consecutivo}" sortBy="#{tbtemasareas.consecutivo}" >
+										 <f:facet name="header">
+										<h:outputText value="consecutivo"/>
+										</f:facet>
+										 <h:outputText value="#{tbtemasareas.consecutivo}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{tbtemasareas.codigo}" sortBy="#{tbtemasareas.codigo}" >
+										 <f:facet name="header">
+										<h:outputText value="Codigo"/>
+										</f:facet>
+										 <h:outputText value="#{tbtemasareas.codigo}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbtemasareas.descripcion}" sortBy="#{tbtemasareas.descripcion}" >
+										 <f:facet name="header">
+										<h:outputText value="Descripcion"/>
+										</f:facet>
+										 <h:outputText value="#{tbtemasareas.descripcion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbtemasareas.fechaCreacion}" sortBy="#{tbtemasareas.fechaCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="FechaCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbtemasareas.fechaCreacion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbtemasareas.usuarioCreacion}" sortBy="#{tbtemasareas.usuarioCreacion}" >
+										 <f:facet name="header">
+										<h:outputText value="UsuarioCreacion"/>
+										</f:facet>
+										 <h:outputText value="#{tbtemasareas.usuarioCreacion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{tbtemasareas.consecutivo_Tbcatalogoareas}" sortBy="#{tbtemasareas.consecutivo_Tbcatalogoareas}" >
+										 <f:facet name="header">
+										<h:outputText value="Consecutivo_Tbcatalogoareas"/>
+										</f:facet>
+										 <h:outputText value="#{tbtemasareas.consecutivo_Tbcatalogoareas}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Opciones">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogTbtemasareas"
+										actionListener="#{tbtemasareasView.action_edit}">
+										<f:attribute name="selectedTbtemasareas" value="#{tbtemasareas}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Borrar" actionListener="#{tbtemasareasView.action_delete_datatable}"
+										onclick="if(!confirm('Se borrara el registro, esta seguro?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedTbtemasareas" value="#{tbtemasareas}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{tbtemasareasView.action_new()}" update=":dialogTbtemasareas" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogTbtemasareas" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{tbtemasareasView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelTbtemasareas" header="Tbtemasareas">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgConsecutivo" value="Consecutivo"/>
+									 <p:inputText id="txtConsecutivo" binding="#{tbtemasareasView.txtConsecutivo}">
+									 <p:ajax update=":dialogTbtemasareas" listener="#{tbtemasareasView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgCodigo" value=" Codigo"/>
+									<p:inputText id="txtCodigo" disabled="true" binding="#{tbtemasareasView.txtCodigo}"/>
+																		<h:outputText id="msgDescripcion" value=" Descripcion"/>
+									<p:inputText id="txtDescripcion" disabled="true" binding="#{tbtemasareasView.txtDescripcion}"/>
+																		<h:outputText id="msgFechaCreacion" value=" FechaCreacion"/>
+									<p:inputText id="txtFechaCreacion" disabled="true" binding="#{tbtemasareasView.txtFechaCreacion}"/>
+																		<h:outputText id="msgUsuarioCreacion" value=" UsuarioCreacion"/>
+									<p:inputText id="txtUsuarioCreacion" disabled="true" binding="#{tbtemasareasView.txtUsuarioCreacion}"/>
+																		<h:outputText id="msgConsecutivo_Tbcatalogoareas" value=" Consecutivo_Tbcatalogoareas"/>
+									<p:inputText id="txtConsecutivo_Tbcatalogoareas" disabled="true" binding="#{tbtemasareasView.txtConsecutivo_Tbcatalogoareas}"/>
+																		
+																    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{tbtemasareasView.btnSave}" value="Grabar" action="#{tbtemasareasView.action_save()}" update=":dialogTbtemasareas :frm:panelDataTableTbtemasareas" />
+									<p:commandButton id="btnClear" value="Limpiar" action="#{tbtemasareasView.action_clear()}" update=":dialogTbtemasareas" />
+									<p:commandButton id="btnExit" value="Exit" action="#{tbtemasareasView.action_closeDialog()}" update=":dialogTbtemasareas" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

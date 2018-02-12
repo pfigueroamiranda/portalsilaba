@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/facelets/template.xhtml">
+		<ui:define name="body">
+			<f:view>
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+				<p:dialog modal="true" widgetVar="statusDialog"
+					header="Procesando.." draggable="false" closable="false">
+					<p:graphicImage
+						value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
+				</p:dialog>
+
+				<!-- Expired session -->
+				<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();"
+					timeout="#{session.maxInactiveInterval * 1000}" />
+				<p:dialog modal="true" widgetVar="sessionTimeOutDialog"
+					header="Finalizo la sesion" draggable="false" closable="false">
+					<h:outputText value="La sesión finalizó" />
+					<input id="confirmBackToLogin" type="button" value="Sign in"
+						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
+				</p:dialog>
+
+
+				<h:form id="formDialog">
+					<p:messages id="msg" />
+					<p:growl id="men" />
+					<p:panel id="panelTbrutaexperienciaaprendizaje"
+						header="Diseño de ruta formación">
+						<h:panelGrid columns="4" id="panelGrid">
+
+
+							<h:outputLabel id="msgCodigo" value=" Proyecto" />
+							<p:selectOneMenu id="proyecto"
+								value="#{tbrutaexperienciaaprendizajeView.intConsecutivo}"
+								style="width:125px">
+								<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+								<f:selectItem
+									itemLabel="Aprende física a través de la cotidianidad"
+									itemValue="1" />
+								<f:selectItem
+									itemLabel="Aprende como funciona el transporte en la ciudad"
+									itemValue="2" />
+								<f:selectItem
+									itemLabel="Conoce los mejores sitios para la fotografia"
+									itemValue="3" />
+								<f:selectItem itemLabel="Conoce la Historia de la ciudad"
+									itemValue="4" />
+							</p:selectOneMenu>
+							<p:commandButton id="btnModify"
+								binding="#{tbrutaexperienciaaprendizajeView.btnModify}"
+								value="Agregar"
+								action="#{tbrutaexperienciaaprendizajeView.consultarRuta()}"
+								update="panelTbrutaexperienciaaprendizaje,msg,panelProyectos" />
+							<p:commandButton id="btnSave"
+								binding="#{tbrutaexperienciaaprendizajeView.btnSave}"
+								value="Grabar"
+								action="#{tbrutaexperienciaaprendizajeView.grabar()}"
+								update="panelTbrutaexperienciaaprendizaje,msg,panelProyectos" />
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel id="panelProyectos">
+						<div align="center">
+							<p:dataTable var="pro"
+								value="#{tbrutaexperienciaaprendizajeView.proyectos}">
+								<p:column headerText="Proyecto">
+									<h:outputText id="proyecto" value="#{pro.descripcion}" />
+								</p:column>
+
+								<p:column headerText="Punto Silaba">
+									<h:outputText id="descripcionCatalogo"
+										value="#{pro.descripcionCtlgoPto}" />
+								</p:column>
+
+								<p:column headerText="Fecha Visita">
+									<p:calendar id="fechaPosibleVisita"
+										value="#{pro.fechaPosibleVisita}" />
+								</p:column>
+								<!--
+								<p:column headerText="Detalle">
+									<p:commandLink id="detalle"
+										actionListener="#{tbrutaexperienciaaprendizajeView.mostrarDetalle}"
+										ajax="false"
+										action="#{tbrutaexperienciaaprendizajeView.mostrarDetalle2}">
+										<h:outputText value="Detalle" />
+										<f:param name="consProyecto" value="#{pro.consecutivo}" />
+									</p:commandLink>
+								</p:column>
+								<p:column headerText="Eliminar">
+									<p:commandLink id="eliminar"
+										actionListener="#{tbrutaexperienciaaprendizajeView.eliminarProyecto}"
+										ajax="false">
+										<h:outputText value="Eliminar" />
+										<f:param name="consProyecto" value="#{pro.consecutivo}" />
+										<f:param name="consSilaber"
+											value="#{pro.tbsilaber.consecutivo}" />
+									</p:commandLink>
+								</p:column>
+-->
+							</p:dataTable>
+
+						</div>
+					</p:panel>
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

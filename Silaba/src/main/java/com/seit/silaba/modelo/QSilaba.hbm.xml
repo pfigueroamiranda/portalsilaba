@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<sql-query name="SilConsultaProyectosSilaber"
+		comment="Consulta los proyectos de cada silaber">
+		<return-scalar column="reaCodigo" type="java.lang.Integer" />
+		<return-scalar column="reaConseExperiencia" type="java.lang.Integer" />
+		<return-scalar column="reaConseSilaber" type="java.lang.Integer" />
+		<return-scalar column="cleProyecto" type="java.lang.String" />
+	<![CDATA[
+		SELECT 
+			rea.codigo									reaCodigo
+			,rea.consecutivo_ctlgo_exprnca_aprndzje		reaConseExperiencia
+			,rea.consecutivo_slbr						reaConseSilaber
+			,cle.descripcion 							cleProyecto			
+		FROM
+			tbrutaexperienciaaprendizaje rea  
+			INNER JOIN tbcatalogoexperienciaaprendizaje cle 
+			ON  rea.consecutivo_ctlgo_exprnca_aprndzje = cle.consecutivo
+		WHERE rea.consecutivo_slbr =:codUser
+   
+    ]]>
+	</sql-query>
+
+	<sql-query name="NifConsultarCuentasBalanceGeneral"
+		comment="Consulta las cuentas asociadas a una empresa que tiene relacion con el diagnostico inicial">
+		<return-scalar column="cueCodigo" type="java.lang.Integer" />
+		<return-scalar column="cemCodigo" type="java.lang.Integer" />
+		<return-scalar column="cueNumeroCuenta" type="java.lang.String" />
+		<return-scalar column="nifCueCodigo" type="java.lang.Integer" />
+		<return-scalar column="nifCueCodigo2" type="java.lang.Integer" />
+		<return-scalar column="cueDescripcion" type="java.lang.String" />
+		<return-scalar column="cueValor" type="java.math.BigDecimal" />
+		<return-scalar column="parCodigo2" type="java.lang.Integer" />
+		<return-scalar column="parCodigo4" type="java.lang.Integer" />
+	<![CDATA[
+SELECT  
+	cue.cue_codigo 			cueCodigo,
+	(select cem_codigo from nif_cuenta_empresa where cue_codigo = cue.cue_codigo and emp_codigo =:codEmp and pbe_codigo in(:pbeCodigo)) cemCodigo,
+	cue.cue_numero_cuenta 	cueNumeroCuenta,
+	cue.nif_cue_codigo 		nifCueCodigo,
+	cue.nif_cue_codigo2 	nifCueCodigo2,
+	cue.cue_descripcion 	cueDescripcion,
+	(select cue_valor from nif_cuenta_empresa where cue_codigo = cue.cue_codigo and emp_codigo =:codEmp and pbe_codigo in(:pbeCodigo)) cueValor,
+
+	cue.par_codigo2                parCodigo2,
+	cue.par_codigo4                parCodigo4
+FROM nif_pregunta PRE
+        INNER JOIN nif_respuesta_empresa REM
+        	ON PRE.pre_codigo = REM.pre_codigo
+        INNER JOIN nif_capitulo  CAP
+        	ON PRE.cap_codigo = CAP.cap_codigo	
+		INNER JOIN nif_capitulo_cuenta CAC
+			ON CAP.cap_codigo = CAC.cap_codigo
+		INNER JOIN nif_cuenta CUE 
+			ON CUE.cue_codigo = CAC.cue_codigo 
+WHERE 
+		CAC.estado IN (1,2)
+		AND cue.par_codigo in (10,16)
+		
+	GROUP BY cue.cue_codigo,
+	cue.cue_numero_cuenta,
+	 		cue.nif_cue_codigo,cue.nif_cue_codigo2,
+	  		cue.cue_descripcion,
+	  		cue.par_codigo2,CUE.orden,cue.par_codigo4  
+	ORDER BY cue.cue_numero_cuenta,cue.cue_codigo, cue.orden
+   
+    ]]>
+	</sql-query>
+	
+	
+	<sql-query name="NifConsultarCuentasBalanceGeneralB"
+		comment="Consulta las cuentas asociadas a una empresa que tiene relacion con el diagnostico inicial">
+		<return-scalar column="cueCodigo" type="java.lang.Integer" />
+		<return-scalar column="cemCodigo" type="java.lang.Integer" />
+		<return-scalar column="cueNumeroCuenta" type="java.lang.String" />
+		<return-scalar column="nifCueCodigo" type="java.lang.Integer" />
+		<return-scalar column="nifCueCodigo2" type="java.lang.Integer" />
+		<return-scalar column="cueDescripcion" type="java.lang.String" />
+		<return-scalar column="cueValor" type="java.math.BigDecimal" />
+		<return-scalar column="parCodigo2" type="java.lang.Integer" />
+		<return-scalar column="parCodigo4" type="java.lang.Integer" />
+	<![CDATA[
+SELECT  
+	cue.cue_codigo 			cueCodigo,
+	cem.cem_codigo 			cemCodigo,
+	cue.cue_numero_cuenta 	cueNumeroCuenta,
+	cue.nif_cue_codigo 		nifCueCodigo,
+	cue.nif_cue_codigo2 	nifCueCodigo2,
+	cue.cue_descripcion 	cueDescripcion,
+	null 					cueValor,
+	cue.par_codigo2         parCodigo2,
+	cue.par_codigo4         parCodigo4
+FROM nif_pregunta PRE
+        INNER JOIN nif_respuesta_empresa REM
+        	ON PRE.pre_codigo = REM.pre_codigo
+        INNER JOIN nif_capitulo  CAP
+        	ON PRE.cap_codigo = CAP.cap_codigo	
+		INNER JOIN nif_capitulo_cuenta CAC
+			ON CAP.cap_codigo = CAC.cap_codigo
+		INNER JOIN nif_cuenta CUE 
+			ON CUE.cue_codigo = CAC.cue_codigo 
+	 	LEFT JOIN  nif_cuenta_empresa cem
+	 		ON cue.cue_codigo = cem.cue_codigo 
+	 		AND  cem.pbe_codigo in( :pbeCodigo)
+WHERE  ( rem.emp_codigo =:codEmp   OR cem.emp_codigo is null ) 
+		AND CAC.estado IN (1,2)
+		AND cue.par_codigo in (10,16)
+		
+	GROUP BY cue.cue_codigo,cem.cem_codigo,cue.cue_numero_cuenta,
+	 		cue.nif_cue_codigo,cue.nif_cue_codigo2,
+	  		cue.cue_descripcion,cem.cue_valor,cue.par_codigo2,CUE.orden,cue.par_codigo4  
+	ORDER BY cue.cue_codigo,cue.cue_numero_cuenta, cue.orden
+   
+    ]]>
+	</sql-query>	
+
+	<sql-query name="NifConsultarCuentasBalanceNIF"
+		comment="Consulta las cuentas asociadas a una empresa que tiene relacion con el diagnostico inicial">
+		<return-scalar column="cueCodigo" type="java.lang.Integer" />
+		<return-scalar column="cemCodigo" type="java.lang.Integer" />
+		<return-scalar column="cueNumeroCuenta" type="java.lang.String" />
+		<return-scalar column="nifCueCodigo" type="java.lang.Integer" />
+		<return-scalar column="nifCueCodigo2" type="java.lang.Integer" />
+		<return-scalar column="cueDescripcion" type="java.lang.String" />
+		<return-scalar column="cueValor" type="java.math.BigDecimal" />
+		<return-scalar column="parCodigo4" type="java.lang.Integer" />
+	<![CDATA[
+SELECT  
+	cue.cue_codigo 			cueCodigo,
+	cem.cem_codigo 			cemCodigo,
+	cue.cue_numero_cuenta 	cueNumeroCuenta,
+	cue.nif_cue_codigo 		nifCueCodigo,
+	cue.nif_cue_codigo2 	nifCueCodigo2,
+	cue.cue_descripcion 	cueDescripcion,
+	cem.cue_valor 			cueValor,
+	cue.par_codigo4 	parCodigo4
+FROM  nif_cuenta CUE  
+	 	INNER JOIN  nif_cuenta_empresa cem
+	 		ON cue.cue_codigo = cem.cue_codigo 
+WHERE  ( cem.emp_codigo =:codEmp   OR cem.emp_codigo is null ) 
+		AND par_Codigo2 in (:parCodigo2)
+		AND  cem.pbe_codigo in( :pbeCodigo)
+		AND CUE.estado=1
+		AND cue.par_codigo  in (10,16)
+		AND cue.mostrar=1
+	GROUP BY cue.cue_codigo,cem.cem_codigo,cue.cue_numero_cuenta,
+	 		cue.nif_cue_codigo,cue.nif_cue_codigo2,
+	  		cue.cue_descripcion,cem.cue_valor,cue.par_codigo4, cue.orden 
+	ORDER BY cue.cue_numero_cuenta asc
+   
+    ]]>
+	</sql-query>
+
+	<sql-query name="NifConsultarValorEjerciciosAnteriores"
+		comment="Consulta el valor de los ejercicios anteriores">
+		<return-scalar column="cueValor" type="java.math.BigDecimal" />
+	<![CDATA[
+		select 
+			cue_valor cuevalor 
+			from nif_cuenta_empresa 
+				where cue_codigo in(1748) 
+				and emp_codigo=:codEmpre
+				AND  pbe_codigo in( :pbeCodigo)
+    ]]>
+	</sql-query>
+	<sql-query name="NifConsultarActivosXCuenta"
+		comment="Consulta el valor total de los activos por cuenta">
+		<return-scalar column="acAdqu" type="java.math.BigDecimal" />
+		<return-scalar column="acDep" type="java.math.BigDecimal" />
+		<return-scalar column="cueCodigo" type="java.lang.Integer" />
+	<![CDATA[
+		SELECT 
+			SUM(act_costo_adquisicion) acAdqu,
+			(CASE WHEN SUM(act_depreciacion_gaap) IS NOT NULL 
+			THEN SUM(act_depreciacion_gaap)
+			ELSE 
+			     0.0 
+			END) acDep,
+			cue_codigo cueCodigo
+			FROM nif_activo_empresa 
+				WHERE   emp_codigo=:codEmpre 	
+				group by cue_codigo
+    ]]>
+	</sql-query>
+
+	<sql-query name="NifConsultarInversionesXCuenta"
+		comment="Consulta el valor total de los inversiones por cuenta">
+		<return-scalar column="ineValor" type="java.math.BigDecimal" />
+		<return-scalar column="cueCodigo" type="java.lang.Integer" />
+	<![CDATA[
+		SELECT 
+			SUM (ine_valor) ineValor ,
+			cue_codigo cueCodigo
+			FROM nif_inversion_empresa 
+				WHERE emp_codigo=:codEmpre
+				group by cue_codigo
+    ]]>
+	</sql-query>
+
+	<sql-query name="NifConsultarConsecutivoPeriodoEmpresa"
+		comment="Consulta el periodo de una empresa">
+		<return-scalar column="pbeCodigo" type="java.lang.Integer" />
+		
+	<![CDATA[
+		SELECT 
+			PBE.pbe_codigo  pbeCodigo
+			FROM nif_cuenta_empresa CUE
+			     INNER JOIN nif_periodo_balance_empresa PBE
+			     ON CUE.pbe_codigo = PBE.pbe_codigo
+				WHERE CUE.emp_codigo =:empCodigo
+				   AND pbe_inicio BETWEEN :fechaInicio AND :fechaFin
+				   AND fecha_fin BETWEEN :fechaInicio AND :fechaFin
+				   AND PBE.estado=1
+				group by PBE.pbe_codigo  
+    ]]>
+	</sql-query>
+	
+	<sql-query name="NifConsultarPreguntasXEmpresa"
+		comment="Consulta las cuentas asociadas a una empresa que tiene relacion con el diagnostico inicial">
+		<return-scalar column="preCodigo" type="java.lang.Integer" />
+		<return-scalar column="capCodigo" type="java.lang.Integer" />
+		<return-scalar column="numeroCapitulo" type="java.lang.String" />
+		<return-scalar column="preDescripcion" type="java.lang.String" />
+		<return-scalar column="rxeRespuesta" type="java.lang.Integer" />
+		<return-scalar column="reeCodigo" type="java.lang.Integer" />		
+	<![CDATA[
+
+			SELECT distinct
+			        PRE.pre_codigo 							preCodigo,
+			        PRE.cap_codigo 							capCodigo,
+			        PRE.pre_numero_capitulo 				numeroCapitulo,
+			        LTRIM(RTRIM(PRE.pre_descripcion)) 		preDescripcion,
+			       --REP.rxe_respuesta 						rxeRespuesta
+			       (select rxe_respuesta from nif_respuesta_empresa where  pre_codigo= PRE.pre_codigo  
+			        and			             emp_codigo =:empCodigo) rxeRespuesta,
+				   (select ree_codigo from nif_respuesta_empresa where  pre_codigo= PRE.pre_codigo  
+			        and			             emp_codigo =:empCodigo) reeCodigo			        			       
+			FROM nif_pregunta PRE
+			        LEFT JOIN  nif_respuesta_empresa REP
+			        ON REP.pre_codigo=PRE.pre_codigo
+			WHERE 
+			        REP.emp_codigo=:empCodigo
+			        --OR PRE.pre_codigo in (1,4,6,10,12,14,16,18,22,24,26,28,30,32,34)
+			        OR PRE.pre_codigo in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35)
+			        ORDER BY PRE.pre_codigo
+			 
+   
+    ]]>
+	</sql-query>	
+
+</hibernate-mapping>
